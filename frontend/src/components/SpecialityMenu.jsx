@@ -6,10 +6,10 @@ const SpecialityMenu = () => {
   return (
     <section
       id="speciality"
-      className="flex flex-col items-center gap-4 py-16 text-gray-800"
+      className="flex flex-col items-center gap-4 py-15 text-gray-800"
     >
-      <h1 className="text-2xl font-bold">Find by Speciality</h1>
-      <p className="sm:w-lg text-center text-base mb-4">
+      <h1 className="text-3xl font-bold">Find by Speciality</h1>
+      <p className="sm:w-lg text-center text-base mb-8">
         Simply browse through our extensive list of trusted doctors, schedule
         your appointment hassle-free.
       </p>
@@ -17,7 +17,7 @@ const SpecialityMenu = () => {
       <div className="flex justify-center items-center flex-wrap gap-4 pt-4 w-full">
         {specialityData.map((item, index) => {
           return (
-            <div className="flex justify-around items-center " key={index}>
+            <div key={index}>
               <Link
                 to={`/doctors/${item.speciality} key=${index}`}
                 onClick={() => scrollTo(0, 0)}

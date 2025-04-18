@@ -9,10 +9,11 @@ import MyProfile from "./pages/MyProfile";
 import MyAppointments from "./pages/MyAppointments";
 import Appointment from "./pages/Appointment";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <main className="container mx-auto max-w-screen-2xl px-5">
+    <main className="container mx-auto max-w-screen-2xl px-5 font-poppins scroll-smooth">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="my-appointments" element={<MyAppointments />} />
         <Route path="appointment/:id" element={<Appointment />} />
       </Routes>
+      <Footer />
     </main>
   );
 };

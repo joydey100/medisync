@@ -17,7 +17,7 @@ const Navbar = () => {
             <h2 className="font-bold text-primary">MediSync</h2>
           </NavLink>
         </div>
-        <ul className="menu hidden md:flex  items-start gap-5 font-medium">
+        <ul className="menu hidden md:flex  items-start gap-5 text-base font-medium">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -63,9 +63,9 @@ const Navbar = () => {
                 alt="profile-pic"
                 className="size-10 rounded-full"
               />
-              <ChevronDown className="size-5"/>
+              <ChevronDown className="size-5" />
               <div className="absolute top-0 right-0 pt-14 text-base tex-gray-600 z-20 hidden group-hover:block">
-                <div className="min-w-48 bg-stone-100 flex flex-col rounded gap-4 p-4 text-center">
+                <div className="min-w-48 bg-stone-100 flex flex-col rounded gap-4 p-4 text-center text-base font-medium">
                   <NavLink
                     to="my-profile"
                     className="hover:text-black transition-all block w-full "
@@ -88,7 +88,7 @@ const Navbar = () => {
           ) : (
             <NavLink
               to="/login"
-              className="bg-primary text-white py-3 px-8 rounded-full hidden md:block "
+              className="bg-primary text-white py-3 px-8 rounded-full hidden md:block text-base font-medium"
             >
               Create Account
             </NavLink>
