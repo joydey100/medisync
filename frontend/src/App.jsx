@@ -12,7 +12,7 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <div className="container mx-auto">
+    <main className="mx-auto px-4 max-w-screen-xl font-poppins">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="my-appointments" element={<MyAppointments />} />
         <Route path="appointment/:id" element={<Appointment />} />
       </Routes>
-    </div>
+    </main>
   );
 };
 
