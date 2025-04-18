@@ -12,7 +12,7 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <main className="mx-auto px-4 max-w-screen-xl font-poppins">
+    <main className="container mx-auto max-w-screen-2xl px-5">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
