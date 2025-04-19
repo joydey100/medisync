@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <section className="my-15 lg:px-10">
+    <section className="my-15 ">
       <div className="flex justify-around items-center flex-wrap bg-primary/80 rounded-lg px-10">
         {/* left side */}
         <div className=" w-full xl:w-1/2 py-10 lg:py-0">

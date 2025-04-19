@@ -19,7 +19,7 @@ const SpecialityMenu = () => {
           return (
             <div key={index}>
               <Link
-                to={`/doctors/${item.speciality} key=${index}`}
+                to={`/doctors/${item.speciality}`}
                 onClick={() => scrollTo(0, 0)}
                 className="flex flex-col items-center gap-2"
               >

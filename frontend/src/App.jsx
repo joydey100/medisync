@@ -13,7 +13,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <main className="container mx-auto max-w-screen-2xl px-5 font-poppins scroll-smooth">
+    <main className="container mx-auto  px-5 font-poppins scroll-smooth ">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

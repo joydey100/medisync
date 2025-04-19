@@ -19,13 +19,13 @@ const TopDoctors = () => {
           return (
             <div
               key={index}
-              className="p-5 bg-slate-100 rounded-xl shadow-md w-full md:w-1/3 lg:w-1/5 xl:w-1/6 flex  flex-col justify-around cursor-pointer hover:translate-y-[-10px] transition-all duration-200"
+              className="p-5  rounded-xl shadow-md w-full sm:w-1/3 lg:w-1/5 xl:w-1/6 flex  flex-col justify-around cursor-pointer hover:translate-y-[-10px] transition-all duration-200"
               onClick={() => navigate(`/appointment/${item._id}`)}
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="bg-white rounded-xl w-full"
+                className="bg-white rounded-xl w-full shadow-md"
               />
               <div className="mt-4 py-5">
                 <h3 className="text-xl font-bold text-primary/80">
@@ -40,12 +40,12 @@ const TopDoctors = () => {
         })}
       </div>
       <div className="flex justify-center mt-8">
-        <Link
-          to="/doctors"
+        <button
+          onClick={() => navigate("/doctors", scrollTo(0, 0))}
           className="text-base font-medium capitalize bg-primary text-white py-3 px-8 rounded-full cursor-pointer"
         >
           See more doctors
-        </Link>
+        </button>
       </div>
     </section>
   );
