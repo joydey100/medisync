@@ -1,9 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 import { assets } from "../assets/assets_frontend/assets";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className="flex flex-col md:flex-row flex-wrap  bg-primary/80 rounded-lg px-6 md:px-10 lg:px-20 mt-5 md:mt-10 mb-15 pt-10">
       {/* left side */}
@@ -24,7 +25,7 @@ const Header = () => {
         </div>
 
         <NavLink
-          to="#speciality"
+          to="/#speciality"
           className=" flex gap-2 items-center bg-white px-6 py-3 rounded-full  cursor-pointer hover:shadow-md  transition-all duration-200 mt-4 text-base font-semibold"
         >
           <span>Book an appointment</span> <MoveRight className="size-5" />
