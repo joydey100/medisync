@@ -38,7 +38,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="copyright py-4 text-base text-center border-t-1 border-gray-200  mt-5 text-gray-400 bg-slate-100">
+      <div className="copyright py-2 text-sm text-center border-t-1 border-gray-200  mt-5 text-gray-400 bg-slate-100">
         &copy; 2025 MediSync. All rights reserved
       </div>
     </footer>

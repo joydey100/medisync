@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className="flex justify-between items-center  mb-5 py-5">
+      <div className="flex justify-between items-center  mb-5 py-5 shadow-xl rounded-2xl px-5 mt-3">
         <div className="logo">
           <NavLink to="/" className="text-2xl flex items-center gap-2">
             <Stethoscope className="size-10 text-primary" />

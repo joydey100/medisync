@@ -91,11 +91,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Richard James is dedicated to providing holistic care with a strong emphasis on preventive healthcare and patient education. He focuses on managing chronic illnesses and ensuring overall wellness.",
     fees: 50,
     address: {
       line1: "17th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Saturday", "Sunday", "Monday"],
+      timeSlots: ["9:00 AM - 12:00 PM", "2:00 PM - 5:00 PM"],
     },
   },
   {
@@ -106,11 +110,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "3 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Emily Larson specializes in women's reproductive health, offering compassionate care in prenatal, postnatal, and gynecological health. She emphasizes patient comfort and education.",
     fees: 60,
     address: {
       line1: "27th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Saturday", "Sunday", "Thursday"],
+      timeSlots: ["10:00 AM - 4:00 PM"],
     },
   },
   {
@@ -121,11 +129,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "1 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Sarah Patel is committed to diagnosing and treating various skin conditions. She has a special interest in acne treatment, cosmetic dermatology, and patient-centered skincare routines.",
     fees: 30,
     address: {
       line1: "37th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Monday", "Tuesday", "Wednesday"],
+      timeSlots: ["4:00 PM - 6:00 PM"],
     },
   },
   {
@@ -136,11 +148,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "2 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Christopher Lee is passionate about pediatric care, focusing on child development, preventive care, and early intervention. He aims to build trust with both children and parents.",
     fees: 40,
     address: {
       line1: "47th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Wednesday", "Thursday", "Friday"],
+      timeSlots: ["9:00 AM - 12:00 PM"],
     },
   },
   {
@@ -151,11 +167,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Jennifer Garcia is a neurologist with expertise in managing disorders of the nervous system. She focuses on conditions like migraines, epilepsy, and neurodegenerative diseases.",
     fees: 50,
     address: {
       line1: "57th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Tuesday", "Wednesday", "Monday"],
+      timeSlots: ["4:00 PM - 8:00 PM"],
     },
   },
   {
@@ -166,11 +186,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Andrew Williams specializes in neurological care, including stroke management, Parkinson's disease, and neuropathies. He integrates modern diagnostics with compassionate care.",
     fees: 50,
     address: {
       line1: "57th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Monday", "Wednesday", "Friday"],
+      timeSlots: ["9:00 AM - 12:00 PM", "6:00 PM - 8:00 PM"],
     },
   },
   {
@@ -181,11 +205,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Christopher Davis is a skilled general physician offering care for a range of acute and chronic illnesses. He emphasizes preventive medicine and long-term health maintenance.",
     fees: 50,
     address: {
       line1: "17th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Thursday"],
+      timeSlots: ["5:00 PM - 8:00 PM"],
     },
   },
   {
@@ -196,11 +224,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "3 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Timothy White is known for his patient-focused approach in women's health, offering services in hormonal care, pregnancy management, and minimally invasive procedures.",
     fees: 60,
     address: {
       line1: "27th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Thursday", "Saturday", "Monday"],
+      timeSlots: ["12:00 PM - 2:00 PM", "4:00 PM - 8:00 PM"],
     },
   },
   {
@@ -211,11 +243,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "1 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Ava Mitchell specializes in medical and aesthetic dermatology. Her interests include eczema, psoriasis, and cosmetic skin enhancements tailored to individual needs.",
     fees: 30,
     address: {
       line1: "37th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Saturday", "Monday"],
+      timeSlots: ["2:00 PM - 8:00 PM"],
     },
   },
   {
@@ -226,11 +262,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "2 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Jeffrey King provides comprehensive pediatric care, emphasizing early development, vaccination, and preventive strategies for healthy childhood growth.",
     fees: 40,
     address: {
       line1: "47th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Tuesday", "Thursday"],
+      timeSlots: ["10:00 AM - 4:00 PM"],
     },
   },
   {
@@ -241,11 +281,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Zoe Kelly is a gastroenterologist focused on digestive system health, including liver diseases, IBS, and endoscopic procedures for diagnosis and treatment.",
     fees: 50,
     address: {
       line1: "57th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Thursday", "Saturday", "Monday"],
+      timeSlots: ["12:00 PM - 2:00 PM", "4:00 PM - 8:00 PM"],
     },
   },
   {
@@ -256,11 +300,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Patrick Harris is an experienced neurologist with a focus on cognitive disorders, epilepsy, and neurorehabilitation, delivering evidence-based care for optimal outcomes.",
     fees: 50,
     address: {
       line1: "57th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Wednesday", "Thursday", "Friday"],
+      timeSlots: ["9:00 AM - 12:00 PM"],
     },
   },
   {
@@ -271,11 +319,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Chloe Evans believes in building lasting relationships with patients through routine checkups, preventive care, and personalized treatment plans.",
     fees: 50,
     address: {
       line1: "17th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Wednesday", "Thursday", "Friday"],
+      timeSlots: ["9:00 AM - 12:00 PM"],
     },
   },
   {
@@ -286,11 +338,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "3 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Ryan Martinez has expertise in adolescent and adult gynecology, fertility treatment, and reproductive endocrinology. He ensures informed decision-making in women's health.",
     fees: 60,
     address: {
       line1: "27th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Wednesday", "Friday"],
+      timeSlots: ["9:00 AM - 2:00 PM"],
     },
   },
   {
@@ -301,11 +357,15 @@ export const doctors = [
     degree: "MBBS",
     experience: "1 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+      "Dr. Amelia Hill offers expertise in dermatological diagnostics and treatment, with interests in skin allergies, pigmentation issues, and non-invasive cosmetic procedures.",
     fees: 30,
     address: {
       line1: "37th Cross, Richmond",
       line2: "Circle, Ring Road, London",
+    },
+    availability: {
+      days: ["Thursday", "Saturday", "Monday"],
+      timeSlots: ["12:00 PM - 2:00 PM", "4:00 PM - 8:00 PM"],
     },
   },
 ];
