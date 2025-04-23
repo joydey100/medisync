@@ -24,12 +24,12 @@ const Header = () => {
           </p>
         </div>
 
-        <NavLink
-          to="/#speciality"
+        <a
+          href="/#speciality"
           className=" flex gap-2 items-center bg-white px-6 py-3 rounded-full  cursor-pointer hover:shadow-md  transition-all duration-200 mt-4 text-base font-semibold"
         >
           <span>Book an appointment</span> <MoveRight className="size-5" />
-        </NavLink>
+        </a>
       </div>
       {/* right side */}
       <div className="right-side-content md:w-1/2 flex flex-col justify-end ">

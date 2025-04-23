@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
+import { Funnel, FunnelX } from "lucide-react";
 
 const Doctors = () => {
   const { speciality } = useParams();
@@ -12,7 +13,7 @@ const Doctors = () => {
     ...new Set(doctors.map((doc) => doc.speciality)),
   ];
   const [currentSpeciality, setCurrentSpeciality] = useState(speciality);
-  console.log(currentSpeciality);
+  const [isFilter, setIsFilter] = useState(false);
 
   useEffect(() => {
     if (speciality) {
@@ -42,28 +43,39 @@ const Doctors = () => {
       </p>
       <div className="flex flex-col md:flex-row flex-wrap justify-evenly gap-4">
         <div className="left-side w-full md:basis-[22%] flex flex-col gap-3">
-          {specialityArea.map((item, index) => {
-            return (
-              <div
-                key={index}
-                onClick={() => handleFilter(item)}
-                className={`cursor-pointer p-3 gap-2 rounded-lg text-base font-medium transition-all duration-200 ${
-                  currentSpeciality === item
-                    ? "bg-primary text-white"
-                    : "bg-slate-100 hover:bg-primary/80 hover:text-white"
-                }`}
-              >
-                <p>{item}</p>
-              </div>
-            );
-          })}
+          <div
+            className="flex items-center justify-between px-3 py-4 rounded-lg bg-gray-100 text-base font-medium hover:bg-primary/80 hover:text-white cursor-pointer md:hidden"
+            onClick={() => setIsFilter(!isFilter)}
+          >
+            <p> Filter</p>
+            {isFilter ? <Funnel /> : <FunnelX />}
+          </div>
+          <div>
+            {specialityArea.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => handleFilter(item)}
+                  className={`cursor-pointer p-3 gap-4 rounded-lg text-base font-medium transition-all duration-200 md:block  ${
+                    isFilter ? "hidden " : "block"
+                  } ${
+                    currentSpeciality === item
+                      ? "bg-primary text-white"
+                      : "bg-slate-100 hover:bg-primary/80 hover:text-white"
+                  }`}
+                >
+                  <p>{item}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className="right-side w-full md:basis-[70%] flex flex-wrap gap-5">
           {filterDoc.map((item, index) => {
             return (
               <div
                 key={index}
-                className="p-5  rounded-xl shadow-md flex  flex-col justify-around cursor-pointer hover:translate-y-[-10px] transition-all duration-200 w-1/4 basis-[30%]"
+                className="p-5  rounded-xl shadow-md flex  flex-col justify-around cursor-pointer hover:translate-y-[-10px] transition-all duration-200 basis-full  md:basis-[40%] lg:basis-[30%]"
                 onClick={() => navigate(`/appointment/${item._id}`)}
               >
                 <img

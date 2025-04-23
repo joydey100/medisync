@@ -26,7 +26,7 @@ const MyProfile = () => {
           <img
             src={userData.image}
             alt={userData.name}
-            className="my-4 size-50 rounded-full"
+            className="my-4 size-40 md:size-50 rounded-full"
           />
         </div>
         <h2 className="text-2xl font-bold mt-8 text-primary/80">

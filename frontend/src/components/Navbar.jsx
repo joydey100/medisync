@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Stethoscope, ChevronDown } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Stethoscope, ChevronDown, Menu, X } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets_frontend/assets";
 
 const Navbar = () => {
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
   const [token, setToken] = useState(true);
+  const [shoWDropDown, setShowDropDown] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <nav>
@@ -55,35 +57,44 @@ const Navbar = () => {
             Contact
           </NavLink>
         </ul>
-        <div className="flex items-center gap-5 justify-center cursor-pointer group relative">
+        <div className="flex items-center gap-5 justify-center  relative">
           {token ? (
-            <div className="flex items-center gap-2">
+            <div
+              className="flex items-center gap-2"
+              onClick={() => setShowDropDown(!shoWDropDown)}
+            >
               <img
                 src={assets.profile_pic}
                 alt="profile-pic"
-                className="size-10 rounded-full"
+                className="size-10 rounded-full cursor-pointer"
               />
-              <ChevronDown className="size-5" />
-              <div className="absolute top-0 right-0 pt-14 text-base tex-gray-600 z-20 hidden group-hover:block">
-                <div className="min-w-48 bg-stone-100 flex flex-col rounded gap-4 p-4 text-center text-base font-medium">
-                  <NavLink
-                    to="my-profile"
-                    className="hover:text-black transition-all block w-full "
-                  >
-                    My Profile
-                  </NavLink>
-                  <NavLink
-                    to="my-appointments"
-                    className="hover:text-black transition-all block w-full "
-                  >
-                    My Appointments
-                  </NavLink>
-                  <button className="block w-full cursor-pointer hover:text-black transition-all">
-                    {" "}
-                    Logout
-                  </button>
-                </div>
-              </div>
+              <ChevronDown className="size-5 cursor-pointer" />
+
+              {
+                // Dropdown menu
+                shoWDropDown && (
+                  <div className="absolute top-0 right-0 pt-14 text-base tex-gray-600 z-20  ">
+                    <div className="min-w-48 bg-stone-100 flex flex-col rounded gap-4 p-4 text-center text-base font-medium">
+                      <NavLink
+                        to="my-profile"
+                        className="hover:text-black transition-all block w-full "
+                      >
+                        My Profile
+                      </NavLink>
+                      <NavLink
+                        to="my-appointments"
+                        className="hover:text-black transition-all block w-full "
+                      >
+                        My Appointments
+                      </NavLink>
+                      <button className="block w-full cursor-pointer hover:text-black transition-all">
+                        {" "}
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )
+              }
             </div>
           ) : (
             <NavLink
@@ -93,8 +104,62 @@ const Navbar = () => {
               Create Account
             </NavLink>
           )}
+          {!showMenu && (
+            <Menu
+              onClick={() => setShowMenu(!showMenu)}
+              className="cursor-pointer block md:hidden"
+            />
+          )}
         </div>
       </div>
+
+      {/* Mobile menu  */}
+      {showMenu && (
+        <div className="mobile-menu absolute top-0 left-0 z-10 bg-white h-screen w-full p-10">
+          <div className="flex justify-between items-center py-4">
+            <div className="logo" onClick={() => setShowMenu(!showMenu)}>
+              <NavLink to="/" className="text-2xl flex items-center gap-2">
+                <Stethoscope className="size-10 text-primary" />
+                <h2 className="font-bold text-primary">MediSync</h2>
+              </NavLink>
+            </div>
+            <X
+              onClick={() => setShowMenu(!showMenu)}
+              className="cursor-pointer size-10"
+            />
+          </div>
+          <div className="mt-15 flex flex-col gap-10 items-center text-xl uppercase font-medium">
+            <Link
+              to="/"
+              onClick={() => setShowMenu(!showMenu)}
+              className="hover:bg-primary w-full block text-center py-3 hover:text-white transition-all duration-300"
+            >
+              Home
+            </Link>
+            <Link
+              to="/doctors"
+              onClick={() => setShowMenu(!showMenu)}
+              className="hover:bg-primary w-full block text-center py-3 hover:text-white transition-all duration-300"
+            >
+              All Doctors
+            </Link>
+            <Link
+              to="/about"
+              onClick={() => setShowMenu(!showMenu)}
+              className="hover:bg-primary w-full block text-center py-3 hover:text-white transition-all duration-300"
+            >
+              About{" "}
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setShowMenu(!showMenu)}
+              className="hover:bg-primary w-full block text-center py-3 hover:text-white transition-all duration-300"
+            >
+              Contact
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
