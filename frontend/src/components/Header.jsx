@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MoveRight } from "lucide-react";
-import { assets } from "../assets/assets_frontend/assets";
+import { assets } from "../assets/assets";
 
 const Header = () => {
   const navigate = useNavigate();

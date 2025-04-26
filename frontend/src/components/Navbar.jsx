@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Stethoscope, ChevronDown, Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import { assets } from "../assets/assets_frontend/assets";
+import { assets } from "../assets/assets";
 
 const Navbar = () => {
   // Mobile menu state
