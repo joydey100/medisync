@@ -1,8 +1,9 @@
 // src/components/AddDoctor.jsx
 import React, { useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, Loader } from "lucide-react";
 import { toast } from "react-toastify";
 import { useAdminContext } from "../../context/AdminContext";
+import axios from "axios";
 
 const AddDoctor = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +24,7 @@ const AddDoctor = () => {
 
   const [previewImage, setPreviewImage] = useState(null);
   const { backendUrl, token } = useAdminContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   const daysOfWeek = [
     "Monday",
@@ -49,22 +51,11 @@ const AddDoctor = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    if (name.includes("availability.")) {
-      // const key = name.split(".")[1];
-      // setFormData((prev) => ({
-      //   ...prev,
-      //   availability: {
-      //     ...prev.availability,
-      //     [key]: value.split(","),
-      //   },
-      // }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleCheckboxChange = (e, type) => {
@@ -83,15 +74,11 @@ const AddDoctor = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prev) => ({
-          ...prev,
-          image: reader.result, // Base64 string
-        }));
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      setPreviewImage(URL.createObjectURL(file));
+      setFormData((prev) => ({
+        ...prev,
+        image: file,
+      }));
     }
   };
 
@@ -105,6 +92,7 @@ const AddDoctor = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       if (!formData.image) {
@@ -126,7 +114,50 @@ const AddDoctor = () => {
           dataToSend.append(key, formData[key]);
         }
       }
-    } catch (error) {}
+
+      console.log(dataToSend, formData);
+      dataToSend.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      const { data } = await axios.post(
+        `${backendUrl}/api/admin/add-doctor`,
+        dataToSend,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (data.success) {
+        setIsLoading(false);
+        toast.success(data.message);
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          image: null,
+          speciality: "",
+          degree: "",
+          experience: "",
+          about: "",
+          fees: "",
+          availability: {
+            days: [],
+            timeSlots: [],
+          },
+        });
+        setPreviewImage(null);
+      } else {
+        setIsLoading(false);
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
@@ -282,9 +313,18 @@ const AddDoctor = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+            className={`px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={isLoading}
           >
-            Add Doctor
+            <div className="flex items-center justify-center gap-2">
+              <span>Add Doctor </span>
+              <span>
+                {" "}
+                {isLoading && <Loader className="animate-spin size-5" />}
+              </span>
+            </div>
           </button>
         </div>
       </form>

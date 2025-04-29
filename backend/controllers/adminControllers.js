@@ -17,28 +17,15 @@ export const addDoctor = async (req, res) => {
       experience,
       about,
       fees,
-      availability,
     } = req.body;
+
+    // Parse availability from separate JSON strings
+    const days = JSON.parse(req.body.days || "[]");
+    const timeSlots = JSON.parse(req.body.timeSlots || "[]");
+
     const imageFile = req.file;
 
-    //  check if all fields are filled
-    // if (
-    //   !name ||
-    //   !email ||
-    //   !password ||
-    //   !speciality ||
-    //   !degree ||
-    //   !experience ||
-    //   !about ||
-    //   !fees ||
-    //   !availability
-    // ) {
-    //   return res
-    //     .status(400)
-    //     .json({ success: false, message: "All fields are required" });
-    // }
-
-    //  if email exist
+    // Email validation
     const existingEmail = await Doctor.findOne({ email });
     if (existingEmail) {
       return res
@@ -46,14 +33,12 @@ export const addDoctor = async (req, res) => {
         .json({ success: false, message: "Email already exists" });
     }
 
-    // validating email format
     if (!validator.isEmail(email)) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid email format" });
     }
 
-    // password length
     if (password.length < 6) {
       return res.status(400).json({
         success: false,
@@ -61,11 +46,9 @@ export const addDoctor = async (req, res) => {
       });
     }
 
-    // hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // upload image to cloudinary
     const result = await cloudinary.uploader.upload(imageFile.path);
     const imageURL = result.secure_url;
 
@@ -79,10 +62,14 @@ export const addDoctor = async (req, res) => {
       about,
       fees,
       password: hashedPassword,
-      availability,
+      availability: {
+        days,
+        timeSlots,
+      },
     };
 
     const doctor = await Doctor.create(doctorData);
+
     res
       .status(200)
       .json({ success: true, message: "Doctor added successfully", doctor });
@@ -114,6 +101,17 @@ export const adminLoginController = async (req, res) => {
     // generate token
     const token = jwt.sign(email, process.env.JWT_SECRET);
     res.status(200).json({ success: true, message: "Login successful", token });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// api to  get all doctor list for admin panel
+export const allDoctors = async (req, res) => {
+  try {
+    const doctors = await Doctor.find({}).select("-password");
+    res.status(200).json({ success: true, doctors });
   } catch (error) {
     console.log(error);
     res.status(400).json({ success: false, message: error.message });
