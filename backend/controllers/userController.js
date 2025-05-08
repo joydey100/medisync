@@ -9,7 +9,7 @@ import Stripe from "stripe";
 import dotenv from "dotenv";
 dotenv.config();
 
-const stripe = Stripe(process.env.STRIPE_SECRET);
+const stripe = Stripe(process.env.STRIPE_API_SECRET);
 
 //  API to register user
 export const registerUser = async (req, res) => {
