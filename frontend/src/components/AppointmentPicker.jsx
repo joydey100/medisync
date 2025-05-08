@@ -47,17 +47,19 @@ const AppointmentPicker = ({ docInfo }) => {
 
       let current = startHour;
       while (current < endHour) {
-        // 🔥 Filter out past times if it's today
         if (!isToday || current > new Date()) {
           slots.push(format(current, "h:mm a"));
         }
-
-        current = new Date(current.getTime() + 30 * 60000); // +30 min
+        current = new Date(current.getTime() + 30 * 60000);
       }
     });
 
     setAvailableTimes(slots);
-    setSelectedTime(""); // reset time when date changes
+
+    // ✅ Only reset if it's not already reset
+    if (selectedTime !== "") {
+      setSelectedTime("");
+    }
   }, [selectedDate, docInfo]);
 
   // Disable dates not in availability

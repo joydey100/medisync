@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    fullName: {
       type: String,
       required: true,
     },
     image: {
       type: String,
-      required: false,
+      default: process.env.DEFAULT_IMAGE,
     },
     email: {
       type: String,
@@ -21,16 +21,13 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true,
     },
     gender: {
       type: String,
       enum: ["Male", "Female", "Non-Binary", "Prefer not to say", "Other"],
-      required: true,
     },
     age: {
       type: Number,
-      required: true,
     },
     bloodGroup: {
       type: String,

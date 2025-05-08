@@ -10,6 +10,10 @@ import MyAppointments from "./pages/MyAppointments";
 import Appointment from "./pages/Appointment";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Success from "./components/Success";
+import Cancel from "./components/Cancel";
 
 const App = () => {
   return (
@@ -25,8 +29,11 @@ const App = () => {
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="my-appointments" element={<MyAppointments />} />
         <Route path="appointment/:id" element={<Appointment />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </main>
   );
 };

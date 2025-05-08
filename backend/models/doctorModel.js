@@ -18,6 +18,7 @@ const doctorSchema = new mongoose.Schema(
     image: {
       type: String,
       required: false,
+      default: process.env.DEFAULT_IMAGE,
     },
     speciality: {
       type: String,
@@ -49,6 +50,11 @@ const doctorSchema = new mongoose.Schema(
         required: true,
       },
     },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
+    slots_booked: { type: Object, default: {} },
   },
   { timestamps: true }
 );

@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useAppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -8,10 +12,52 @@ const Login = () => {
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const { userToken, setUserToken } = useAppContext();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (isLogin) {
+      // login logic
+      try {
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+          formData
+        );
+        setUserToken(data.token);
+        localStorage.setItem("userToken", data.token);
+        toast.success(data.message);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+        toast.error(error.response.data.message);
+      }
+    } else {
+      // signup logic
+      try {
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
+          formData
+        );
+        console.log(data);
+        setUserToken(data.token);
+        localStorage.setItem("userToken", data.token);
+        toast.success(data.message);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+        toast.error(error.response.data.message);
+      }
+    }
   };
+
+  useEffect(() => {
+    if (userToken) {
+      navigate("/");
+    }
+  }, [userToken]);
+
   return (
     <section className="py-16 flex items-center justify-center">
       <div className="shadow-md rounded-xl p-10  md:min-w-lg">

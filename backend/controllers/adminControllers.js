@@ -117,3 +117,38 @@ export const allDoctors = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+export const changeDoctorsAvailability = async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    console.log(doctorId);
+
+    const doctor = await Doctor.findById(doctorId);
+
+    if (!doctor) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Doctor not found" });
+    }
+
+    const updateDoctorAvailable = await Doctor.findByIdAndUpdate(
+      doctorId,
+      {
+        isAvailable: !doctor.isAvailable,
+      },
+      { new: true }
+    );
+
+    console.log(updateDoctorAvailable);
+
+    res.status(200).json({
+      success: true,
+      message: `${updateDoctorAvailable.name} is ${
+        updateDoctorAvailable.isAvailable ? "available" : "not available"}`,
+      updateDoctorAvailable,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};

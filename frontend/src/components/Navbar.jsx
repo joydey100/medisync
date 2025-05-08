@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import { Stethoscope, ChevronDown, Menu, X } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
-  const [token, setToken] = useState(true);
+  const { userToken, setUserToken, userData } = useAppContext();
   const [shoWDropDown, setShowDropDown] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
+  const navigate = useNavigate();
+
+  // logout handler
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    setUserToken(null);
+    navigate("/");
+    toast.success("Successfully logged out");
+  };
+
   return (
     <nav>
-      <div className="flex justify-between items-center  mb-5 py-5 shadow-xl rounded-2xl px-5 mt-3">
+      <div className="flex justify-between items-center  mb-5 py-5 shadow-xl rounded-2xl px-8 mt-3">
         <div className="logo">
           <NavLink to="/" className="text-2xl flex items-center gap-2">
             <Stethoscope className="size-10 text-primary" />
@@ -58,13 +70,13 @@ const Navbar = () => {
           </NavLink>
         </ul>
         <div className="flex items-center gap-5 justify-center  relative">
-          {token ? (
+          {userToken && userData ? (
             <div
               className="flex items-center gap-2"
               onClick={() => setShowDropDown(!shoWDropDown)}
             >
               <img
-                src={assets.profile_pic}
+                src={userData.image}
                 alt="profile-pic"
                 className="size-10 rounded-full cursor-pointer"
               />
@@ -87,7 +99,10 @@ const Navbar = () => {
                       >
                         My Appointments
                       </NavLink>
-                      <button className="block w-full cursor-pointer hover:text-black transition-all">
+                      <button
+                        className="block w-full cursor-pointer hover:text-black transition-all"
+                        onClick={handleLogout}
+                      >
                         {" "}
                         Logout
                       </button>
