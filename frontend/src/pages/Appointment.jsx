@@ -6,7 +6,7 @@ import getAvailableDates from "../utils/getAvailableDates";
 import AppointmentPicker from "../components/AppointmentPicker";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 
 const Appointment = () => {
   const { id } = useParams();
@@ -26,9 +26,7 @@ const Appointment = () => {
   );
 
   const navigate = useNavigate();
-  const stripe = useStripe();
-  const elements = useElements();
-  const [success, setSuccess] = useState(false);
+
 
   const fetchDoctor = async () => {
     const findDoc = doctors.find((doc) => doc._id === id);

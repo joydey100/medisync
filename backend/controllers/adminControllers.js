@@ -3,6 +3,7 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import { v2 as cloudinary } from "cloudinary";
 import jwt from "jsonwebtoken";
+import Appointment from "../models/appointmentModel.js";
 
 // API for adding doctor
 
@@ -144,9 +145,21 @@ export const changeDoctorsAvailability = async (req, res) => {
     res.status(200).json({
       success: true,
       message: `${updateDoctorAvailable.name} is ${
-        updateDoctorAvailable.isAvailable ? "available" : "not available"}`,
+        updateDoctorAvailable.isAvailable ? "available" : "not available"
+      }`,
       updateDoctorAvailable,
     });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// api to get appointment list
+export const appointmentsAdmin = async (req, res) => {
+  try {
+    const appointments = await Appointment.find({}).select("-password");
+    res.status(200).json({ success: true, appointments });
   } catch (error) {
     console.log(error);
     res.status(400).json({ success: false, message: error.message });

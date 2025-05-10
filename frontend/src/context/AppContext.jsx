@@ -24,6 +24,8 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  console.log(userData); // Add this line to log userData;
+
   const getAppointments = async () => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/user/appointments`, {
@@ -47,12 +49,6 @@ const AppContextProvider = ({ children }) => {
     fetchDoctors();
   }, []);
 
-  useEffect(() => {
-    if (userToken) {
-      getUserData();
-    }
-  }, [userToken]);
-
   const getUserData = async () => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/user/profile`, {
@@ -61,11 +57,21 @@ const AppContextProvider = ({ children }) => {
         },
       });
 
-      setUserData(data.user);
+      console.log(data);
+
+      if (data.success) {
+        setUserData(data.user);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (userToken) {
+      getUserData();
+    }
+  }, [userToken]);
 
   return (
     <AppContext.Provider

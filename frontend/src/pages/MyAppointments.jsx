@@ -8,7 +8,9 @@ import { loadStripe } from "@stripe/stripe-js";
 const MyAppointments = () => {
   const { appointments, userToken, getAppointments } = useAppContext();
 
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  console.log(success);
 
   const months = [
     "January",
@@ -60,24 +62,31 @@ const MyAppointments = () => {
     }
   };
 
-  const payment = async (docData) => {
-    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
+  const payment = async (item) => {
+    try {
+      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/user/payment`,
-      docData,
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      }
-    );
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/payment`,
+        item,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
 
-    const result = await stripe.redirectToCheckout({
-      sessionId: data.id,
-    });
+      console.log(data);
 
-    console.log(result);
+      const result = await stripe.redirectToCheckout({
+        sessionId: data.id,
+      });
+
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   if (appointments.length === 0) {
@@ -122,11 +131,17 @@ const MyAppointments = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-5 mt-5 md:mt-0">
-                  {!item.cancelled && (
+                  {item.payment && (
+                    <button className="border-2 py-3 px-8  rounded-full text-sm font-medium text-green-500 border-green-500">
+                      Payment Done
+                    </button>
+                  )}
+
+                  {!item.cancelled && !item.payment && (
                     <>
                       <button
                         className="bg-primary py-3 px-8 text-white rounded-full text-base font-medium cursor-pointer"
-                        onClick={() => payment(item.docData)}
+                        onClick={() => payment(item)}
                       >
                         Pay Online
                       </button>

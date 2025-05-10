@@ -307,7 +307,9 @@ export const cancelAppointment = async (req, res) => {
 export const paymentStripe = async (req, res) => {
   const data = req.body;
 
-  const { name, image, fees } = data;
+  const { _id } = data;
+
+  const { name, image, fees } = data.docData;
 
   const lineItems = [
     {
@@ -327,9 +329,38 @@ export const paymentStripe = async (req, res) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    success_url: `http://localhost:5173/success`,
+    success_url: `http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}&_id=${_id}`,
     cancel_url: `http://localhost:5173/cancel`,
   });
 
-  res.json({ id: session.id });
+  res.json({ id: session.id, url: session.url });
+};
+
+export const verifyStripeSession = async (req, res) => {
+  const { session_id, _id } = req.query;
+
+  if (!session_id) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing session ID" });
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(session_id);
+
+    if (session && session.payment_status === "paid") {
+      await Appointment.findByIdAndUpdate(_id, {
+        payment: true,
+      });
+
+      return res.status(200).json({ success: true, session });
+    } else {
+      return res
+        .status(403)
+        .json({ success: false, message: "Payment not verified" });
+    }
+  } catch (error) {
+    console.error("Stripe verify error:", error.message);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
 };
