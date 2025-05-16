@@ -3,10 +3,12 @@ import { useAdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDoctorContext } from "../context/DoctorContext";
 
 const Login = () => {
   const [isAdmin, setIsAdmin] = useState(true);
   const { token, setToken, backendUrl } = useAdminContext();
+  const { docToken, setDocToken } = useDoctorContext();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,6 +16,7 @@ const Login = () => {
 
   // submit form  handler
   const handleSubmit = async (e) => {
+    console.log(`clicked`, isAdmin);
     e.preventDefault();
     try {
       if (isAdmin) {
@@ -30,14 +33,18 @@ const Login = () => {
           toast.error(result.message);
         }
       } else {
-        const response = await axios.post(`${backendUrl}/api/admin/login`, {
-          email: data.email,
-          password: data.password,
-        });
+        const response = await axios.post(
+          `${backendUrl}/api/doctor/doctor-login`,
+          {
+            email: data.email,
+            password: data.password,
+          }
+        );
         const result = await response.data;
+
         if (result.success) {
-          localStorage.setItem("token", result.token);
-          setToken(result.token);
+          localStorage.setItem("docToken", result.token);
+          setDocToken(result.token);
         } else {
           alert(result.message);
         }
@@ -89,7 +96,7 @@ const Login = () => {
           Login
         </button>
         <p className="mt-3">
-          {isAdmin ? "Admin login" : "Doctor login"}
+          {isAdmin ? "Doctor login" : "Admin login"}
           <span
             className="text-primary cursor-pointer ml-1"
             onClick={() => setIsAdmin(!isAdmin)}

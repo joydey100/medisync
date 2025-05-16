@@ -61,9 +61,17 @@ const AppContextProvider = ({ children }) => {
 
       if (data.success) {
         setUserData(data.user);
+      } else {
+        console.log(data);
+        setUserData(null);
+        setUserToken(null);
+        localStorage.removeItem("userToken");
       }
     } catch (error) {
       console.log(error);
+      setUserData(null);
+      setUserToken(null);
+      localStorage.removeItem("userToken");
     }
   };
 

@@ -2,18 +2,28 @@ import React, { useState } from "react";
 import { Stethoscope, LogOut, X } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAdminContext } from "../context/AdminContext";
+import { useDoctorContext } from "../context/DoctorContext";
 
 const Navbar = () => {
   // Mobile menu state
   const [isOpen, setIsOpen] = useState(false);
   const { token, setToken } = useAdminContext();
+  const { docToken, setDocToken } = useDoctorContext();
   const [showMenu, setShowMenu] = useState(false);
   const naviage = useNavigate();
 
   const LogoutHandle = () => {
-    localStorage.removeItem("token");
-    setToken("");
-    naviage("/");
+    if (token) {
+      localStorage.removeItem("token");
+      setToken("");
+      naviage("/");
+    }
+
+    if (docToken) {
+      localStorage.removeItem("docToken");
+      setDocToken("");
+      naviage("/");
+    }
   };
 
   return (

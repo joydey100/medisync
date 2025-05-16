@@ -1,4 +1,5 @@
 import Doctor from "../models/doctorModel.js";
+import User from "../models/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { v2 as cloudinary } from "cloudinary";
@@ -100,7 +101,9 @@ export const adminLoginController = async (req, res) => {
     }
 
     // generate token
-    const token = jwt.sign(email, process.env.JWT_SECRET);
+    const token = jwt.sign(email, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
     res.status(200).json({ success: true, message: "Login successful", token });
   } catch (error) {
     console.log(error);
@@ -160,6 +163,27 @@ export const appointmentsAdmin = async (req, res) => {
   try {
     const appointments = await Appointment.find({}).select("-password");
     res.status(200).json({ success: true, appointments });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// api to get dashboard
+export const adminDashboard = async (req, res) => {
+  try {
+    const appointments = await Appointment.find({}).select("-password");
+    const doctors = await Doctor.find({}).select("-password");
+    const users = await User.find({}).select("-password");
+
+    const dashData = {
+      totalAppointments: appointments.length,
+      totalDoctors: doctors.length,
+      totalUsers: users.length,
+      latestAppointments: appointments.reverse().slice(0, 5),
+    };
+
+    res.status(200).json({ success: true, dashData });
   } catch (error) {
     console.log(error);
     res.status(400).json({ success: false, message: error.message });
